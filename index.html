@@ -21,23 +21,44 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        .responsive-title {
-            font-size: clamp(1.5rem, 8vw, 3.5rem);
-            line-height: 1.1;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            hyphens: auto;
+        /* ส่วนหัวข้อใหม่แบบป้องกันการล้นและย่อขยายตามจอ 100% */
+        .title-wrapper {
+            width: 100%;
+            max-width: 600px;
+            margin: 1.5rem auto;
+            padding: 0 10px;
+            display: flex;
+            justify-content: center;
         }
 
-        /* หัวใจลอยขึ้นและจางหาย */
+        /* SVG Text สำหรับการย่อขยายที่สมบูรณ์แบบ */
+        .svg-title {
+            width: 100%;
+            height: auto;
+            display: block;
+            overflow: visible;
+            /* ป้องกันตัวอักษรโดนตัดขอบ */
+        }
+
+        .svg-title text {
+            font-family: 'Mali', cursive;
+            font-weight: 800;
+            fill: #e11d48;
+            text-transform: uppercase;
+            filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 0.5));
+        }
+
+        /* แอนิเมชันหัวใจลอย */
         @keyframes heartFloat {
             0% {
                 transform: translate(0, 0) scale(0.5) rotate(0deg);
                 opacity: 0;
             }
+
             20% {
                 opacity: 1;
             }
+
             100% {
                 transform: translate(var(--tw-translate-x), -100vh) scale(1.2) rotate(var(--tw-rotate));
                 opacity: 0;
@@ -52,9 +73,19 @@
         }
 
         @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-10px);
+            }
+
+            75% {
+                transform: translateX(10px);
+            }
         }
 
         .shake {
@@ -141,8 +172,9 @@
 <body class="min-h-screen flex flex-col items-center justify-center text-rose-800 relative p-4">
 
     <!-- ==================== PAGE 1: LOGIN ==================== -->
-    <div id="page-login" class="flex flex-col items-center justify-center w-full max-w-sm mx-auto space-y-6 transition-opacity duration-1000">
-        <h1 class="text-xl md:text-2xl font-bold text-center mb-1 px-4 leading-relaxed break-words">
+    <div id="page-login"
+        class="flex flex-col items-center justify-center w-full max-w-sm mx-auto space-y-6 transition-opacity duration-1000">
+        <h1 class="text-xl md:text-2xl font-bold text-center mb-1 px-4">
             🔐 ใส่รหัสลับ 4 ตัวนะอ้วน ❤️
         </h1>
         <h2 class="text-rose-500 font-medium text-sm md:text-base text-center px-4">
@@ -150,11 +182,13 @@
         </h2>
 
         <div id="gift-box" class="gift-container w-24 h-24 md:w-32 md:h-32 relative mx-auto">
-            <div class="lid absolute w-[110%] h-8 md:h-10 bg-rose-500 left-[-5%] top-0 rounded-lg z-20 border-b-4 border-rose-700 shadow-lg flex justify-center items-center">
+            <div
+                class="lid absolute w-[110%] h-8 md:h-10 bg-rose-500 left-[-5%] top-0 rounded-lg z-20 border-b-4 border-rose-700 shadow-lg flex justify-center items-center">
                 <div class="w-6 h-full bg-rose-300"></div>
                 <div class="absolute -top-4 text-rose-500 text-2xl md:text-4xl drop-shadow-md">🎀</div>
             </div>
-            <div class="body absolute w-full h-20 md:h-24 bg-rose-400 top-8 rounded-b-lg z-10 shadow-xl flex justify-center">
+            <div
+                class="body absolute w-full h-20 md:h-24 bg-rose-400 top-8 rounded-b-lg z-10 shadow-xl flex justify-center">
                 <div class="w-6 h-full bg-rose-300"></div>
             </div>
         </div>
@@ -177,77 +211,118 @@
                 <button onclick="handleKeyClick('7')" class="keypad-btn">7</button>
                 <button onclick="handleKeyClick('8')" class="keypad-btn">8</button>
                 <button onclick="handleKeyClick('9')" class="keypad-btn">9</button>
-                <button onclick="handleKeyClick('*')" class="keypad-btn action-btn"><i data-lucide="delete" class="w-5 h-5"></i></button>
+                <button onclick="handleKeyClick('*')" class="keypad-btn"><i data-lucide="delete"
+                        class="w-5 h-5"></i></button>
                 <button onclick="handleKeyClick('0')" class="keypad-btn">0</button>
-                <button onclick="handleKeyClick('#')" class="keypad-btn action-btn"><i data-lucide="check" class="w-5 h-5"></i></button>
+                <button onclick="handleKeyClick('#')" class="keypad-btn"><i data-lucide="check"
+                        class="w-5 h-5"></i></button>
             </div>
         </div>
     </div>
 
     <!-- ==================== PAGE 2: CONTENT ==================== -->
     <div id="page-content" class="hidden w-full max-w-xl p-2 md:p-8 animate-fade-in pb-20">
-        <h1 class="responsive-title font-bold text-center text-rose-600 mb-6 px-4 uppercase tracking-tight">
-            Happy Wedding Anniversary 🎉
-        </h1>
 
-        <div class="bg-white/60 p-5 md:p-8 rounded-2xl shadow-sm mb-8 text-center space-y-3 border border-rose-100 mx-2">
-            <p class="text-base md:text-xl text-rose-800 leading-relaxed">ขอบคุณที่รักและดูแลกันเป็นอย่างดีเสมอมา</p>
-            <p class="text-base md:text-lg text-rose-700 leading-relaxed">เราผ่านอะไรมาด้วยกันมากมายทั้งร้ายและดี</p>
-            <p class="text-base md:text-lg text-rose-700 leading-relaxed">ทุกวันที่ได้อยู่กับเธอคือของขวัญที่ดีที่สุดเลย</p>
-            <p class="text-lg md:text-xl text-rose-700 font-bold mt-2 leading-relaxed break-words">รักมากที่สุดในโลกเลยนะเจ้าอ้วน! ❤️</p>
+        <!-- หัวข้อที่ปรับแก้ใหม่: ใช้ textLength เพื่อบังคับขนาดให้พอดีจอเสมอ -->
+        <div class="title-wrapper">
+            <svg viewBox="0 0 500 60" class="svg-title" preserveAspectRatio="xMidYMid meet">
+                <text x="50%" y="45" text-anchor="middle" font-size="36" textLength="480"
+                    lengthAdjust="spacingAndGlyphs">
+                    HAPPY WEDDING ANNIVERSARY
+                </text>
+            </svg>
         </div>
 
-        <div class="w-full aspect-[4/3] bg-rose-200 rounded-2xl overflow-hidden shadow-xl mb-8 border-4 border-white mx-auto">
-            <img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg" class="w-full h-full object-cover" alt="Couple photo">
+        <div
+            class="bg-white/60 p-5 md:p-8 rounded-2xl shadow-sm mb-8 text-center space-y-3 border border-rose-100 mx-2">
+            <p class="text-base md:text-xl text-rose-800">ขอบคุณที่รักและดูแลกันเป็นอย่างดีเสมอมา</p>
+            <p class="text-base md:text-lg text-rose-700">เราผ่านอะไรมาด้วยกันมากมายทั้งร้ายและดี</p>
+            <p class="text-base md:text-lg text-rose-700">ทุกวันที่ได้อยู่กับเธอคือของขวัญที่ดีที่สุดเลย</p>
+            <p class="text-lg md:text-xl text-rose-700 font-bold mt-2">รักมากที่สุดในโลกเลยนะเจ้าอ้วน! ❤️</p>
         </div>
 
-        <!-- iOS Music Player -->
-        <div class="w-full ios-blur rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-6 shadow-xl mb-10 text-rose-900 border border-white/50 relative overflow-hidden mx-auto max-w-md">
+        <div
+            class="w-full aspect-[4/3] bg-rose-200 rounded-2xl overflow-hidden shadow-xl mb-8 border-4 border-white mx-auto">
+            <img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                class="w-full h-full object-cover">
+        </div>
+
+        <!-- Music Player -->
+        <div
+            class="w-full ios-blur rounded-[1.5rem] p-4 md:p-6 shadow-xl mb-10 text-rose-900 border border-white/50 relative overflow-hidden mx-auto max-w-md">
             <div class="flex gap-3 items-center mb-6">
-                <div class="w-14 h-14 md:w-20 md:h-20 rounded-xl shadow-lg shrink-0 overflow-hidden bg-rose-100 border border-rose-200">
-                    <img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg" class="w-full h-full object-cover">
+                <div class="w-14 h-14 md:w-20 md:h-20 rounded-xl shadow-lg shrink-0 overflow-hidden bg-rose-100">
+                    <img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                        class="w-full h-full object-cover">
                 </div>
                 <div class="flex-1 min-w-0 pr-2">
-                    <h3 class="font-bold text-base md:text-lg truncate break-words">เพลงพิเศษสำหรับอ้วน</h3>
-                    <p class="text-rose-700/80 truncate text-xs md:text-sm">เชื้อไฟ - HUGO</p>
+                    <h3 class="font-bold text-base md:text-lg truncate">เพลงพิเศษสำหรับอ้วน</h3>
+                    <p class="text-rose-700/80 truncate text-xs">เชื้อไฟ - HUGO</p>
                 </div>
             </div>
-
             <div class="space-y-2 px-1">
                 <div class="w-full bg-rose-900/10 h-1.5 rounded-full overflow-hidden">
-                    <div id="progress-bar" class="bg-rose-500 h-full w-0 rounded-full transition-all duration-300"></div>
+                    <div id="progress-bar" class="bg-rose-500 h-full w-0 rounded-full transition-all duration-300">
+                    </div>
                 </div>
-                <div class="flex justify-between text-[10px] md:text-xs text-rose-700/60 font-medium">
+                <div class="flex justify-between text-[10px] text-rose-700/60">
                     <span id="current-time">0:00</span>
                     <span id="duration">-:--</span>
                 </div>
             </div>
-
             <div class="flex justify-center items-center gap-8 mt-4">
                 <button class="text-rose-700/80"><i data-lucide="skip-back" class="fill-current w-6 h-6"></i></button>
-                <button id="main-play-btn" onclick="toggleMusic()"
+                <button onclick="toggleMusic()"
                     class="bg-rose-500 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-all">
                     <i data-lucide="play" id="play-icon" class="fill-current w-5 h-5 ml-1"></i>
                 </button>
-                <button class="text-rose-700/80"><i data-lucide="skip-forward" class="fill-current w-6 h-6"></i></button>
+                <button class="text-rose-700/80"><i data-lucide="skip-forward"
+                        class="fill-current w-6 h-6"></i></button>
             </div>
-
-            <audio id="bg-music" loop preload="auto" playsinline webkit-playsinline>
-                <source src="https://res.cloudinary.com/dnbnk98y9/video/upload/v1766723004/%E0%B9%80%E0%B8%8A%E0%B8%B7%E0%B9%89%E0%B8%AD%E0%B9%84%E0%B8%9F_aipdg0.mp4" type="video/mp4">
+            <audio id="bg-music" loop playsinline webkit-playsinline>
+                <source
+                    src="https://res.cloudinary.com/dnbnk98y9/video/upload/v1766723004/%E0%B9%80%E0%B8%8A%E0%B8%B7%E0%B9%89%E0%B8%AD%E0%B9%84%E0%B8%9F_aipdg0.mp4"
+                    type="video/mp4">
             </audio>
         </div>
 
-        <h2 class="text-xl md:text-2xl font-bold text-center mb-6 text-rose-500">ความทรงจำของเรา 📸</h2>
-        <div class="grid grid-cols-2 gap-3 md:gap-4 mb-12 px-2">
-            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg" class="w-full h-full object-cover"></div>
-            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg" class="w-full h-full object-cover"></div>
-            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg" class="w-full h-full object-cover"></div>
-            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg" class="w-full h-full object-cover"></div>
+        <h2 class="text-xl font-bold text-center mb-6 text-rose-500">ความทรงจำของเรา 📸</h2>
+        <div class="grid grid-cols-2 gap-3 mb-12 px-2">
+            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img
+                    src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                    class="w-full h-full object-cover"></div>
+            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img
+                    src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                    class="w-full h-full object-cover"></div>
+            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img
+                    src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                    class="w-full h-full object-cover"></div>
+            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img
+                    src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                    class="w-full h-full object-cover"></div>
+            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img
+                    src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                    class="w-full h-full object-cover"></div>
+            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img
+                    src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                    class="w-full h-full object-cover"></div>
+            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img
+                    src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                    class="w-full h-full object-cover"></div>
+            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img
+                    src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                    class="w-full h-full object-cover"></div>
+             <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img
+                    src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                    class="w-full h-full object-cover"></div>
+            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img
+                    src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                    class="w-full h-full object-cover"></div>
         </div>
 
         <div class="text-center py-8 border-t-2 border-rose-100 px-6">
-            <p class="text-base md:text-xl text-rose-600 font-bold mb-1 leading-tight break-words">ไม่ว่าจะผ่านไปกี่ปี ก็ยังจะรักแบบนี้ตลอดไป</p>
-            <p class="text-xs md:text-sm text-rose-400">LT & HS</p>
+            <p class="text-base text-rose-600 font-bold mb-1">ไม่ว่าจะผ่านไปกี่ปี ก็ยังจะรักแบบนี้ตลอดไป</p>
+            <p class="text-xs text-rose-400">LT & HS</p>
         </div>
     </div>
 
@@ -258,35 +333,20 @@
         const CORRECT_PASSCODE = "1402";
         let currentInput = "";
         let isPlaying = false;
-        let audioWarmedUp = false; 
         const audio = document.getElementById('bg-music');
         const playIcon = document.getElementById('play-icon');
         const progressBar = document.getElementById('progress-bar');
         const currentTimeEl = document.getElementById('current-time');
         const durationEl = document.getElementById('duration');
 
-        function warmUpAudio() {
-            if (!audioWarmedUp) {
-                audio.load(); 
-                audioWarmedUp = true;
-            }
-        }
-
         function handleKeyClick(key) {
-            warmUpAudio(); 
-            pressKey(key);
-        }
-
-        function pressKey(key) {
             if (key === '*') {
                 currentInput = currentInput.slice(0, -1);
             } else if (key === '#') {
                 checkPasscode();
             } else if (currentInput.length < 4) {
                 currentInput += key;
-                if (currentInput.length === 4) {
-                    setTimeout(checkPasscode, 200);
-                }
+                if (currentInput.length === 4) setTimeout(checkPasscode, 200);
             }
             updateDisplay();
         }
@@ -302,29 +362,18 @@
         function checkPasscode() {
             if (currentInput === CORRECT_PASSCODE) {
                 document.getElementById('gift-box').classList.add('open');
-                
-                // สั่งให้หัวใจกระจายทั่วหน้าจอหลายรอบ
-                spawnHearts(50); 
-                
-                audio.play().then(() => {
-                    isPlaying = true;
-                    updatePlayIcon();
-                }).catch(err => {
-                    console.error("Audio playback failed:", err);
-                });
-
+                spawnHearts(40);
+                audio.play().then(() => { isPlaying = true; updatePlayIcon(); }).catch(e => console.log(e));
                 setTimeout(() => {
                     document.getElementById('page-login').classList.add('opacity-0');
                     setTimeout(() => {
                         document.getElementById('page-login').classList.add('hidden');
                         document.getElementById('page-content').classList.remove('hidden');
-                        lucide.createIcons();
                         window.scrollTo(0, 0);
-                        // สั่งหัวใจเพิ่มอีกครั้งหลังจากเปลี่ยนหน้า
-                        spawnHearts(30);
+                        spawnHearts(20);
                     }, 800);
                 }, 1000);
-            } else if (currentInput.length === 4) {
+            } else {
                 document.getElementById('error-msg').innerText = "รหัสผิดนะอ้วน ลองใหม่เร็ว~ 🥺";
                 document.getElementById('pin-display').classList.add('shake');
                 setTimeout(() => {
@@ -336,84 +385,47 @@
             }
         }
 
-        // ฟังก์ชันสร้างหัวใจกระจายทั่วจอ
-        function spawnHearts(count = 20) {
+        function spawnHearts(count) {
             const container = document.getElementById('hearts-container');
-            const emojis = ['❤️', '💖', '💗', '💓', '💕', '💘'];
-            
             for (let i = 0; i < count; i++) {
                 const heart = document.createElement('div');
-                const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-                
-                heart.innerHTML = randomEmoji;
+                heart.innerHTML = ['❤️', '💖', '💕', '💘'][Math.floor(Math.random() * 4)];
                 heart.className = 'heart-float';
-                
-                // สุ่มตำแหน่งเริ่มต้นทั่วหน้าจอ
-                const startX = Math.random() * 100; // 0-100vw
-                const startY = Math.random() * 100 + 50; // เริ่มจากด้านล่างจอ
-                
-                // สุ่มระยะการเลื่อนซ้าย-ขวา (แกน X)
-                const driftX = (Math.random() - 0.5) * 200; // -100px ถึง 100px
-                
-                // สุ่มความเร็วและมุมหมุน
-                const duration = Math.random() * 2 + 2; // 2-4 วินาที
-                const rotation = Math.random() * 360;
-                const size = Math.random() * 20 + 20; // 20-40px
-
-                heart.style.left = startX + 'vw';
-                heart.style.top = startY + 'vh';
-                heart.style.fontSize = size + 'px';
-                heart.style.setProperty('--tw-translate-x', driftX + 'px');
-                heart.style.setProperty('--tw-rotate', rotation + 'deg');
-                heart.style.setProperty('--duration', duration + 's');
-                
-                // สุ่มดีเลย์เพื่อให้หัวใจไม่ขึ้นพร้อมกันทีเดียว
-                heart.style.animationDelay = Math.random() * 0.5 + 's';
-
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = '100vh';
+                heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                heart.style.setProperty('--tw-translate-x', ((Math.random() - 0.5) * 200) + 'px');
+                heart.style.setProperty('--tw-rotate', Math.random() * 360 + 'deg');
+                heart.style.setProperty('--duration', (Math.random() * 2 + 2) + 's');
                 container.appendChild(heart);
-                
-                // ลบ Element เมื่อจบ Animation
-                setTimeout(() => heart.remove(), (duration + 1) * 1000);
+                setTimeout(() => heart.remove(), 4000);
             }
         }
 
         audio.ontimeupdate = () => {
             if (audio.duration) {
-                const percent = (audio.currentTime / audio.duration) * 100;
-                progressBar.style.width = percent + "%";
+                progressBar.style.width = (audio.currentTime / audio.duration) * 100 + "%";
                 currentTimeEl.innerText = formatTime(audio.currentTime);
                 durationEl.innerText = formatTime(audio.duration);
             }
         };
 
         function formatTime(s) {
-            if (isNaN(s)) return "0:00";
             const m = Math.floor(s / 60);
             const sec = Math.floor(s % 60);
             return `${m}:${sec < 10 ? '0' + sec : sec}`;
         }
 
         function toggleMusic() {
-            if (isPlaying) {
-                audio.pause();
-                isPlaying = false;
-            } else {
-                audio.play().then(() => {
-                    isPlaying = true;
-                }).catch(e => console.error(e));
-            }
+            if (isPlaying) { audio.pause(); isPlaying = false; }
+            else { audio.play().then(() => isPlaying = true); }
             updatePlayIcon();
         }
 
         function updatePlayIcon() {
-            const iconName = isPlaying ? 'pause' : 'play';
-            playIcon.setAttribute('data-lucide', iconName);
+            playIcon.setAttribute('data-lucide', isPlaying ? 'pause' : 'play');
             lucide.createIcons();
         }
-
-        audio.addEventListener('loadedmetadata', () => {
-            durationEl.innerText = formatTime(audio.duration);
-        });
     </script>
 </body>
 
