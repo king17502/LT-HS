@@ -218,15 +218,15 @@
 
         <!-- Header 1 Row -->
         <h1 class="text-3xl md:text-5xl font-bold text-center text-rose-600 mb-8 drop-shadow-sm">
-            happy wedding anniversary 🎉
+            happy wedding <br>anniversary
         </h1>
 
         <!-- Text 3 Rows -->
         <div class="bg-white/60 p-6 rounded-2xl shadow-sm mb-8 text-center space-y-2 border border-rose-100">
-            <p class="text-xl text-rose-800">ขอบคุณที่รักและดูแลกันเป็นอย่างดีเสมอมา</p>
-            <p class="text-lg text-rose-700">เราผ่านอะไรมาด้วยกันมากมายทั้งร้ายและดี</p>
-            <p class="text-lg text-rose-700">ทุกวันที่ได้อยู่กับเธอคือของขวัญที่ดีที่สุดเลย</p>
-            <p class="text-lg text-rose-700 font-bold">รักมากที่สุดในโลกเลยนะเจ้าอ้วน! ❤️</p>
+            <p class="text-xl text-rose-800">ขอบคุณที่รักและดูแลกันเสมอมา</p>
+            <p class="text-lg text-rose-700">ผ่านอะไรมาด้วยกันมากมายทั้งร้ายและดี</p>
+            <p class="text-lg text-rose-700">อ้วนคือของขวัญที่ดีที่สุดเลย</p>
+            <p class="text-lg text-rose-700 font-bold">รักมากที่สุดในโลกเลยนะเจ้าอ้วน!❤️</p>
         </div>
 
         <!-- Big Image -->
@@ -236,46 +236,37 @@
                 alt="Our Main Photo" class="w-full h-full object-cover">
         </div>
 
-        <!-- Music Player -->
+        <!-- iOS Music Player -->
         <div
-            class="w-full ios-blur rounded-[2rem] p-6 shadow-xl mb-10 text-rose-900 mx-auto max-w-sm border border-white/50 relative overflow-hidden">
-            <!-- Background Decoration -->
-            <div class="absolute top-0 right-0 w-32 h-32 bg-rose-300 rounded-full blur-[50px] opacity-30 -z-10"></div>
-
+            class="w-full ios-blur rounded-[2rem] p-6 shadow-xl mb-10 text-rose-900 border border-white/50 relative overflow-hidden">
             <div class="flex gap-4 items-center mb-6">
-                <!-- Album Art - เปลี่ยนลิงก์รูปภาพใน src ด้านล่างนี้ได้เลย -->
-                <div class="w-20 h-20 rounded-2xl shadow-lg shrink-0 overflow-hidden bg-rose-100">
-                    <img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg" class="w-full h-full object-cover">
+                <div class="w-20 h-20 rounded-2xl shadow-lg shrink-0 overflow-hidden bg-rose-100 border border-rose-200">
+                    <img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                        class="w-full h-full object-cover">
                 </div>
-                <!-- Song Info -->
                 <div class="flex-1 min-w-0">
-                    <h3 class="font-bold text-xl truncate">เพลงของเรา</h3>
-                    <p class="text-rose-700/80 truncate">เชื้อไฟ - HUGO</p>
+                    <h3 class="font-bold text-xl truncate">เพลงพิเศษสำหรับเธอ</h3>
+                    <p class="text-rose-700/80 truncate text-sm">เชื้อไฟ-HUGO</p>
                 </div>
             </div>
-
-            <!-- Progress Bar -->
+        
             <div class="space-y-2">
                 <div class="w-full bg-rose-900/10 h-1.5 rounded-full overflow-hidden">
-                    <div id="progress-bar" class="bg-rose-500 h-full w-0 rounded-full transition-all duration-300">
-                    </div>
+                    <div id="progress-bar" class="bg-rose-500 h-full w-0 rounded-full transition-all duration-300"></div>
                 </div>
                 <div class="flex justify-between text-xs text-rose-700/60 font-medium">
                     <span id="current-time">0:00</span>
                     <span id="duration">-:--</span>
                 </div>
             </div>
-
-            <!-- Controls -->
+        
             <div class="flex justify-center items-center gap-8 mt-4">
-                <button class="text-rose-700/80 hover:text-rose-900 transition"><i data-lucide="skip-back"
-                        class="fill-current w-8 h-8"></i></button>
-                <button onclick="toggleMusic()"
-                    class="bg-rose-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-rose-600 hover:scale-105 active:scale-95 transition-all">
+                <button class="text-rose-700/80"><i data-lucide="skip-back" class="fill-current w-8 h-8"></i></button>
+                <button id="main-play-btn" onclick="toggleMusic()"
+                    class="bg-rose-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all">
                     <i data-lucide="play" id="play-icon" class="fill-current w-6 h-6 ml-1"></i>
                 </button>
-                <button class="text-rose-700/80 hover:text-rose-900 transition"><i data-lucide="skip-forward"
-                        class="fill-current w-8 h-8"></i></button>
+                <button class="text-rose-700/80"><i data-lucide="skip-forward" class="fill-current w-8 h-8"></i></button>
             </div>
 
             <!-- Audio File -->
@@ -351,7 +342,7 @@
 
         <!-- Footer Text 2 Rows -->
         <div class="text-center py-8 border-t-2 border-rose-100">
-            <p class="text-xl text-rose-600 font-bold mb-2">ไม่ว่าจะผ่านไปกี่ปี ก็ยังจะรักแบบนี้ตลอดไป</p>
+            <p class="text-xl text-rose-600 font-bold mb-2">ไม่ว่าจะผ่านไปกี่ปี <br>ก็ยังจะรักแบบนี้ตลอดไป</p>
             <p class="text-md text-rose-400">LT & HS</p>
         </div>
 
@@ -361,78 +352,70 @@
     <div id="hearts-container" class="fixed inset-0 pointer-events-none z-50 overflow-hidden"></div>
 
     <script>
-        // Initialize Icons
         lucide.createIcons();
-
-        // CONFIGURATION
         const CORRECT_PASSCODE = "1402";
         let currentInput = "";
+        let isPlaying = false;
+        const audio = document.getElementById('bg-music');
+
+        // สำคัญสำหรับ iPhone: ฟังก์ชันนี้จะ "ปลดล็อค" เสียงเมื่อมีการกดปุ่มใดๆ ครั้งแรก
+        function unlockAudio() {
+            audio.play().then(() => {
+                audio.pause(); // เล่นแล้วหยุดทันทีเพื่อปลดล็อคสถานะ "Silent" ของ iOS
+            }).catch(e => console.log("Audio unlock waiting..."));
+            window.removeEventListener('click', unlockAudio);
+            window.removeEventListener('touchstart', unlockAudio);
+        }
+        window.addEventListener('click', unlockAudio);
+        window.addEventListener('touchstart', unlockAudio);
 
         function pressKey(key) {
-            const errorMsg = document.getElementById('error-msg');
-            const dots = document.querySelectorAll('.pin-dot');
-
-            if (errorMsg.innerText !== "") errorMsg.innerText = "";
-
-            if (key === '*') {
-                currentInput = currentInput.slice(0, -1);
-            } else if (key === '#') {
-                checkPasscode();
-                return;
-            } else {
-                if (currentInput.length < 4) {
-                    currentInput += key;
-                }
+            // ปลดล็อคเสียงเมื่อเริ่มกดรหัส (สำหรับ iOS)
+            if (audio.paused && currentInput === "") {
+                audio.load();
             }
 
+            if (key === '*') currentInput = currentInput.slice(0, -1);
+            else if (key === '#') checkPasscode();
+            else if (currentInput.length < 4) currentInput += key;
             updateDisplay();
-
-            if (currentInput.length === 4) {
-                setTimeout(checkPasscode, 300);
-            }
+            if (currentInput.length === 4) setTimeout(checkPasscode, 300);
         }
 
         function updateDisplay() {
             const dots = document.querySelectorAll('.pin-dot');
-            dots.forEach((dot, index) => {
-                if (index < currentInput.length) {
-                    dot.innerText = currentInput[index];
-                    dot.classList.add('active', 'filled');
-                } else {
-                    dot.innerText = "";
-                    dot.classList.remove('active', 'filled');
-                }
+            dots.forEach((dot, i) => {
+                dot.innerText = i < currentInput.length ? currentInput[i] : "";
+                dot.classList.toggle('filled', i < currentInput.length);
             });
         }
 
         function checkPasscode() {
-            const errorMsg = document.getElementById('error-msg');
-            const giftBox = document.getElementById('gift-box');
-
             if (currentInput === CORRECT_PASSCODE) {
-                errorMsg.innerText = "";
-                giftBox.classList.add('open');
+                document.getElementById('gift-box').classList.add('open');
                 spawnHearts();
 
+                // สำหรับ iOS: พยายามเล่นเพลงทันทีหลังจากกรอกรหัสถูก
+                audio.play().then(() => {
+                    isPlaying = true;
+                    updatePlayIcon();
+                }).catch(e => console.log("Auto-play blocked, need manual click"));
+
                 setTimeout(() => {
-                    document.getElementById('page-login').style.opacity = '0';
+                    document.getElementById('page-login').classList.add('opacity-0');
                     setTimeout(() => {
                         document.getElementById('page-login').classList.add('hidden');
                         document.getElementById('page-content').classList.remove('hidden');
                     }, 1000);
                 }, 1500);
-
-            } else {
-                if (currentInput.length > 0) {
-                    errorMsg.innerText = "รหัสผิดนะอ้วน ลองใหม่เร็ว~ 🥺";
-                    const container = document.getElementById('pin-display');
-                    container.classList.add('shake');
-                    setTimeout(() => {
-                        container.classList.remove('shake');
-                        currentInput = "";
-                        updateDisplay();
-                    }, 500);
-                }
+            } else if (currentInput.length > 0) {
+                document.getElementById('error-msg').innerText = "รหัสผิดนะเตง 🥺";
+                document.getElementById('pin-display').classList.add('shake');
+                setTimeout(() => {
+                    document.getElementById('pin-display').classList.remove('shake');
+                    currentInput = "";
+                    updateDisplay();
+                }, 500);
             }
         }
 
@@ -441,19 +424,16 @@
             for (let i = 0; i < 30; i++) {
                 const heart = document.createElement('div');
                 heart.innerHTML = '❤️';
-                heart.classList.add('heart-float');
+                heart.className = 'heart-float';
                 heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.top = Math.random() * 20 + 40 + 'vh';
+                heart.style.top = '60vh';
                 heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
                 heart.style.animationDuration = (Math.random() * 2 + 1) + 's';
                 container.appendChild(heart);
-                setTimeout(() => { heart.remove(); }, 3000);
+                setTimeout(() => heart.remove(), 3000);
             }
         }
 
-        // Music Player Logic
-        let isPlaying = false;
-        const audio = document.getElementById('bg-music');
         const playIcon = document.getElementById('play-icon');
         const progressBar = document.getElementById('progress-bar');
         const currentTimeEl = document.getElementById('current-time');
@@ -468,30 +448,33 @@
             }
         };
 
-        function formatTime(seconds) {
-            const min = Math.floor(seconds / 60);
-            const sec = Math.floor(seconds % 60);
-            return `${min}:${sec < 10 ? '0' + sec : sec}`;
+        function formatTime(s) {
+            const m = Math.floor(s / 60); const sec = Math.floor(s % 60);
+            return `${m}:${sec < 10 ? '0' + sec : sec}`;
         }
 
         function toggleMusic() {
             if (isPlaying) {
                 audio.pause();
-                playIcon.setAttribute('data-lucide', 'play');
             } else {
                 audio.play().catch(e => {
-                    const msg = document.createElement('div');
-                    msg.className = "fixed bottom-10 bg-black/80 text-white px-4 py-2 rounded-full text-sm";
-                    msg.innerText = "แตะหน้าจอหนึ่งครั้งก่อนเล่นเพลงนะ";
-                    document.body.appendChild(msg);
-                    setTimeout(() => msg.remove(), 2000);
+                    console.error("Playback failed:", e);
                 });
-                playIcon.setAttribute('data-lucide', 'pause');
             }
-            lucide.createIcons();
             isPlaying = !isPlaying;
+            updatePlayIcon();
         }
-    </script>
-</body>
 
-</html>
+        function updatePlayIcon() {
+            playIcon.setAttribute('data-lucide', isPlaying ? 'pause' : 'play');
+            lucide.createIcons();
+        }
+
+        // โหลดข้อมูลระยะเวลาเพลงเมื่อพร้อม
+        audio.addEventListener('loadedmetadata', () => {
+            durationEl.innerText = formatTime(audio.duration);
+        });
+    </script>
+    </body>
+    
+    </html>
