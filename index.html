@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,20 +11,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Mali:wght@300;500;700&display=swap" rel="stylesheet">
     <!-- Import Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
+
     <style>
         body {
             font-family: 'Mali', cursive;
             background-color: #ffe4e6;
             overflow-x: hidden;
-            touch-action: manipulation; 
+            touch-action: manipulation;
         }
 
         /* Animations */
         @keyframes float {
-            0% { transform: translateY(0px); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateY(-100px); opacity: 0; }
+            0% {
+                transform: translateY(0px);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
         }
 
         .heart-float {
@@ -33,9 +44,19 @@
         }
 
         @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-10px);
+            }
+
+            75% {
+                transform: translateX(10px);
+            }
         }
 
         .shake {
@@ -48,13 +69,16 @@
             cursor: pointer;
             transition: transform 0.5s;
         }
+
         .lid {
             transition: transform 0.5s ease-in-out;
             transform-origin: bottom center;
         }
+
         .gift-container.open .lid {
             transform: rotateX(110deg) translateY(-20px);
         }
+
         .gift-container.open {
             transform: translateY(20px);
         }
@@ -69,12 +93,12 @@
 
         /* Cute Keypad Styles */
         .keypad-btn {
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             background-color: white;
             color: #e11d48;
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: bold;
             display: flex;
             align-items: center;
@@ -84,46 +108,78 @@
             cursor: pointer;
             border: 2px solid #ffe4e6;
         }
-        .keypad-btn:active { transform: scale(0.9); background-color: #ffe4e6; }
+
+        @media (min-width: 640px) {
+            .keypad-btn {
+                width: 65px;
+                height: 65px;
+                font-size: 1.5rem;
+            }
+        }
+
+        .keypad-btn:active {
+            transform: scale(0.9);
+            background-color: #ffe4e6;
+        }
 
         .pin-dot {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 12px;
             border: 2px solid #fecdd3;
-            background-color: rgba(255,255,255,0.5);
+            background-color: rgba(255, 255, 255, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: bold;
             color: #e11d48;
         }
-        .pin-dot.filled { background-color: white; border-color: #e11d48; }
+
+        @media (min-width: 640px) {
+            .pin-dot {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+
+        .pin-dot.filled {
+            background-color: white;
+            border-color: #e11d48;
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center text-rose-800 relative">
+
+<body class="min-h-screen flex flex-col items-center justify-center text-rose-800 relative p-4">
 
     <!-- ==================== PAGE 1: LOGIN ==================== -->
-    <div id="page-login" class="flex flex-col items-center justify-center w-full max-w-md p-4 space-y-6 transition-opacity duration-1000">
-        <h1 class="text-2xl md:text-3xl font-bold text-center mb-2">ใส่รหัสหัวใจ 4 ตัวนะเตง ❤️</h1>
+    <div id="page-login"
+        class="flex flex-col items-center justify-center w-full max-w-sm mx-auto space-y-6 transition-opacity duration-1000">
+        <h1 class="text-xl md:text-3xl font-bold text-center mb-2 px-2 leading-tight">
+        🔐 ใส่รหัสลับ 4 ตัวนะอ้วน ❤️</h1>
+        <h2>💕คนพิเศษเท่านั้นที่เข้าได้ 💕</h2>
 
-        <div id="gift-box" class="gift-container w-32 h-32 relative mx-auto">
-            <div class="lid absolute w-36 h-10 bg-rose-500 left-[-8px] top-0 rounded-lg z-20 border-b-4 border-rose-700 shadow-lg flex justify-center items-center">
+        <div id="gift-box" class="gift-container w-28 h-28 md:w-32 md:h-32 relative mx-auto">
+            <div
+                class="lid absolute w-[110%] h-10 bg-rose-500 left-[-5%] top-0 rounded-lg z-20 border-b-4 border-rose-700 shadow-lg flex justify-center items-center">
                 <div class="w-6 h-full bg-rose-300"></div>
-                <div class="absolute -top-5 text-rose-500 text-4xl drop-shadow-md">🎀</div>
+                <div class="absolute -top-5 text-rose-500 text-3xl md:text-4xl drop-shadow-md">🎀</div>
             </div>
-            <div class="body absolute w-32 h-24 bg-rose-400 top-8 rounded-b-lg z-10 shadow-xl flex justify-center">
+            <div class="body absolute w-full h-24 bg-rose-400 top-8 rounded-b-lg z-10 shadow-xl flex justify-center">
                 <div class="w-6 h-full bg-rose-300"></div>
             </div>
         </div>
 
-        <div class="w-full bg-white/60 backdrop-blur-md p-6 rounded-3xl shadow-xl border border-white/50">
-            <div class="flex justify-center gap-3 mb-6" id="pin-display">
-                <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+        <div class="w-full bg-white/60 backdrop-blur-md p-4 md:p-6 rounded-3xl shadow-xl border border-white/50">
+            <div class="flex justify-center gap-2 md:gap-3 mb-6" id="pin-display">
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
             </div>
             <p id="error-msg" class="text-center text-rose-500 h-6 font-bold text-sm mb-2"></p>
-            <div class="grid grid-cols-3 gap-3 justify-items-center max-w-[250px] mx-auto">
+            <div class="grid grid-cols-3 gap-3 justify-items-center max-w-[220px] md:max-w-[250px] mx-auto">
                 <button onclick="pressKey('1')" class="keypad-btn">1</button>
                 <button onclick="pressKey('2')" class="keypad-btn">2</button>
                 <button onclick="pressKey('3')" class="keypad-btn">3</button>
@@ -133,66 +189,146 @@
                 <button onclick="pressKey('7')" class="keypad-btn">7</button>
                 <button onclick="pressKey('8')" class="keypad-btn">8</button>
                 <button onclick="pressKey('9')" class="keypad-btn">9</button>
-                <button onclick="pressKey('*')" class="keypad-btn action-btn text-xl"><i data-lucide="delete"></i></button>
+                <button onclick="pressKey('*')" class="keypad-btn action-btn text-xl"><i data-lucide="delete"
+                        class="w-5 h-5"></i></button>
                 <button onclick="pressKey('0')" class="keypad-btn">0</button>
-                <button onclick="pressKey('#')" class="keypad-btn action-btn text-xl"><i data-lucide="check"></i></button>
+                <button onclick="pressKey('#')" class="keypad-btn action-btn text-xl"><i data-lucide="check"
+                        class="w-5 h-5"></i></button>
             </div>
         </div>
     </div>
 
     <!-- ==================== PAGE 2: CONTENT ==================== -->
-    <div id="page-content" class="hidden w-full max-w-2xl p-4 md:p-8 animate-fade-in pb-20">
-        <h1 class="text-3xl md:text-5xl font-bold text-center text-rose-600 mb-8">Happy Anniversary My Love 🎉</h1>
+    <div id="page-content" class="hidden w-full max-w-xl p-2 md:p-8 animate-fade-in pb-20">
+        <h1
+            class="text-2xl sm:text-3xl md:text-5xl font-bold text-center text-rose-600 mb-6 px-2 leading-tight break-words">
+            happy wedding anniversary 🎉
+        </h1>
+<!-- Text 3 Rows -->
+<div class="bg-white/60 p-6 rounded-2xl shadow-sm mb-8 text-center space-y-2 border border-rose-100">
+    <p class="text-xl text-rose-800">ขอบคุณที่รักและดูแลกันเป็นอย่างดีเสมอมา</p>
+    <p class="text-lg text-rose-700">เราผ่านอะไรมาด้วยกันมากมายทั้งร้ายและดี</p>
+    <p class="text-lg text-rose-700">ทุกวันที่ได้อยู่กับเธอคือของขวัญที่ดีที่สุดเลย</p>
+    <p class="text-lg text-rose-700 font-bold">รักมากที่สุดในโลกเลยนะเจ้าอ้วน! ❤️</p>
+</div>
 
-        <div class="w-full aspect-[4/3] bg-rose-200 rounded-3xl overflow-hidden shadow-xl mb-8 border-4 border-white">
-            <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover">
+<!-- Big Image -->
+        <div
+            class="w-full aspect-[4/3] bg-rose-200 rounded-2xl md:rounded-3xl overflow-hidden shadow-xl mb-6 border-4 border-white">
+            <img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                class="w-full h-full object-cover">
         </div>
 
         <!-- iOS Music Player -->
-        <div class="w-full ios-blur rounded-[2rem] p-6 shadow-xl mb-10 text-rose-900 border border-white/50 relative overflow-hidden">
-            <div class="flex gap-4 items-center mb-6">
-                <div class="w-20 h-20 rounded-2xl shadow-lg shrink-0 overflow-hidden bg-rose-100 border border-rose-200">
-                    <img src="https://images.unsplash.com/photo-1459749411177-042180ce673c?q=80&w=200" class="w-full h-full object-cover">
+        <div
+            class="w-full ios-blur rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-6 shadow-xl mb-8 text-rose-900 border border-white/50 relative overflow-hidden">
+            <div class="flex gap-3 md:gap-4 items-center mb-6">
+                <div
+                    class="w-16 h-16 md:w-20 md:h-20 rounded-xl md:rounded-2xl shadow-lg shrink-0 overflow-hidden bg-rose-100 border border-rose-200">
+                    <img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                        class="w-full h-full object-cover">
                 </div>
                 <div class="flex-1 min-w-0">
-                    <h3 class="font-bold text-xl truncate">เพลงพิเศษสำหรับเธอ</h3>
-                    <p class="text-rose-700/80 truncate text-sm">Tap to play music</p>
+                    <h3 class="font-bold text-lg md:text-xl truncate">เพลงพิเศษสำหรับอ้วน</h3>
+                    <p class="text-rose-700/80 truncate text-xs md:text-sm">เชื้อไฟ -HUGO</p>
                 </div>
             </div>
-            
+
             <div class="space-y-2">
                 <div class="w-full bg-rose-900/10 h-1.5 rounded-full overflow-hidden">
-                    <div id="progress-bar" class="bg-rose-500 h-full w-0 rounded-full transition-all duration-300"></div>
+                    <div id="progress-bar" class="bg-rose-500 h-full w-0 rounded-full transition-all duration-300">
+                    </div>
                 </div>
-                <div class="flex justify-between text-xs text-rose-700/60 font-medium">
+                <div class="flex justify-between text-[10px] md:text-xs text-rose-700/60 font-medium">
                     <span id="current-time">0:00</span>
                     <span id="duration">-:--</span>
                 </div>
             </div>
 
-            <div class="flex justify-center items-center gap-8 mt-4">
-                <button class="text-rose-700/80"><i data-lucide="skip-back" class="fill-current w-8 h-8"></i></button>
-                <button id="main-play-btn" onclick="toggleMusic()" class="bg-rose-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all">
-                    <i data-lucide="play" id="play-icon" class="fill-current w-6 h-6 ml-1"></i>
+            <div class="flex justify-center items-center gap-6 md:gap-8 mt-4">
+                <button class="text-rose-700/80"><i data-lucide="skip-back"
+                        class="fill-current w-6 h-6 md:w-8 md:h-8"></i></button>
+                <button id="main-play-btn" onclick="toggleMusic()"
+                    class="bg-rose-500 text-white w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all">
+                    <i data-lucide="play" id="play-icon" class="fill-current w-5 h-5 md:w-6 md:h-6 ml-1"></i>
                 </button>
-                <button class="text-rose-700/80"><i data-lucide="skip-forward" class="fill-current w-8 h-8"></i></button>
+                <button class="text-rose-700/80"><i data-lucide="skip-forward"
+                        class="fill-current w-6 h-6 md:w-8 md:h-8"></i></button>
             </div>
 
-            <!-- ไฟล์เพลง MP3 -->
             <audio id="bg-music" loop preload="auto" playsinline>
-                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                <source src="https://res.cloudinary.com/dnbnk98y9/video/upload/v1766723004/%E0%B9%80%E0%B8%8A%E0%B8%B7%E0%B9%89%E0%B8%AD%E0%B9%84%E0%B8%9F_aipdg0.mp4" type="audio/mpeg">
             </audio>
         </div>
-
+        <!-- Gallery: 10 Images -->
         <h2 class="text-2xl font-bold text-center mb-6 text-rose-500">ความทรงจำของเรา 📸</h2>
         <div class="grid grid-cols-2 gap-4 mb-12">
-            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400" class="w-full h-full object-cover"></div>
-            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400" class="w-full h-full object-cover"></div>
+            <!-- Image 1 -->
+            <div
+                class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md hover:scale-[1.02] transition-transform duration-300">
+                <img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                    class="w-full h-full object-cover">
+            </div>
+            <!-- Image 2 -->
+            <div
+                class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md hover:scale-[1.02] transition-transform duration-300">
+                <img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                    class="w-full h-full object-cover">
+            </div>
+            <!-- Image 3 -->
+            <div
+                class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md hover:scale-[1.02] transition-transform duration-300">
+                <img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                    class="w-full h-full object-cover">
+            </div>
+            <!-- Image 4 -->
+            <div
+                class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md hover:scale-[1.02] transition-transform duration-300">
+                <img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                    class="w-full h-full object-cover">
+            </div>
+            <!-- Image 5 -->
+            <div
+                class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md hover:scale-[1.02] transition-transform duration-300">
+                <img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                    class="w-full h-full object-cover">
+            </div>
+            <!-- Image 6 -->
+            <div
+                class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md hover:scale-[1.02] transition-transform duration-300">
+                <img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                    class="w-full h-full object-cover">
+            </div>
+            <!-- Image 7 -->
+            <div
+                class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md hover:scale-[1.02] transition-transform duration-300">
+                <img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                    class="w-full h-full object-cover">
+            </div>
+            <!-- Image 8 -->
+            <div
+                class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md hover:scale-[1.02] transition-transform duration-300">
+                <img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                    class="w-full h-full object-cover">
+            </div>
+            <!-- Image 9 -->
+            <div
+                class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md hover:scale-[1.02] transition-transform duration-300">
+                <img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                    class="w-full h-full object-cover">
+            </div>
+            <!-- Image 10 -->
+            <div
+                class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md hover:scale-[1.02] transition-transform duration-300">
+                <img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                    class="w-full h-full object-cover">
+            </div>
         </div>
 
-        <div class="text-center py-8 border-t-2 border-rose-100">
-            <p class="text-xl text-rose-600 font-bold mb-2">รักเตงที่สุดในโลกเลยนะ ❤️</p>
-            <p class="text-md text-rose-400">Your Name & Partner Name</p>
+
+        <div class="text-center py-6 border-t-2 border-rose-100 px-4">
+            <p class="text-lg md:text-xl text-rose-600 font-bold mb-1 leading-snug">ไม่ว่าจะผ่านไปกี่ปี ก็ยังจะรักแบบนี้ตลอดไป</p>
+            <p class="text-sm md:text-md text-rose-400">LT & HS</p>
         </div>
     </div>
 
@@ -203,14 +339,12 @@
         const CORRECT_PASSCODE = "1402";
         let currentInput = "";
         let isPlaying = false;
-        let isPasscodeCorrect = false; // ตัวแปรใหม่เพื่อเช็คความถูกต้องของรหัสก่อนเล่นเพลง
+        let isPasscodeCorrect = false;
         const audio = document.getElementById('bg-music');
 
         function pressKey(key) {
-            // เมื่อกดปุ่มเลขครั้งแรก ให้แค่เตรียมความพร้อม (Warming up) 
-            // แต่จะไม่สั่ง .play() เพื่อเลี่ยงบัคเพลงเล่นก่อนรหัสครบ
             if (currentInput === "") {
-                audio.load(); 
+                audio.load();
             }
 
             if (key === '*') {
@@ -236,23 +370,22 @@
 
         function checkPasscode() {
             if (currentInput === CORRECT_PASSCODE) {
-                isPasscodeCorrect = true; // ยืนยันว่ารหัสถูกต้องแล้ว
-                
-                // สั่งเล่นเพลงในจังหวะที่ User แตะปุ่ม (Synchronous call สำหรับ iOS)
+                isPasscodeCorrect = true;
                 startMusicOnCorrect();
 
                 document.getElementById('gift-box').classList.add('open');
                 spawnHearts();
-                
+
                 setTimeout(() => {
                     document.getElementById('page-login').classList.add('opacity-0');
                     setTimeout(() => {
                         document.getElementById('page-login').classList.add('hidden');
                         document.getElementById('page-content').classList.remove('hidden');
+                        window.scrollTo(0, 0);
                     }, 800);
                 }, 1000);
             } else if (currentInput.length === 4) {
-                document.getElementById('error-msg').innerText = "รหัสผิดนะเตง 🥺";
+                document.getElementById('error-msg').innerText = "รหัสผิดนะอ้วน ลองใหม่เร็ว~🥺";
                 document.getElementById('pin-display').classList.add('shake');
                 setTimeout(() => {
                     document.getElementById('pin-display').classList.remove('shake');
@@ -263,29 +396,28 @@
         }
 
         function startMusicOnCorrect() {
-            // จะเล่นเพลงได้ก็ต่อเมื่อรหัสผ่านถูกต้องเท่านั้น
             if (isPasscodeCorrect) {
                 audio.play().then(() => {
                     isPlaying = true;
                     updatePlayIcon();
                 }).catch(err => {
-                    console.log("Playback failed initially, manual play required");
+                    console.log("Playback failed initially");
                 });
             }
         }
 
         function spawnHearts() {
             const container = document.getElementById('hearts-container');
-            for(let i=0; i<30; i++) {
+            for (let i = 0; i < 25; i++) {
                 const heart = document.createElement('div');
                 heart.innerHTML = '❤️';
                 heart.className = 'heart-float';
                 heart.style.left = Math.random() * 100 + 'vw';
                 heart.style.top = '60vh';
-                heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
-                heart.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+                heart.style.animationDuration = (Math.random() * 1.5 + 1) + 's';
                 container.appendChild(heart);
-                setTimeout(() => heart.remove(), 3000);
+                setTimeout(() => heart.remove(), 2500);
             }
         }
 
@@ -295,7 +427,7 @@
         const durationEl = document.getElementById('duration');
 
         audio.ontimeupdate = () => {
-            if(audio.duration) {
+            if (audio.duration) {
                 const percent = (audio.currentTime / audio.duration) * 100;
                 progressBar.style.width = percent + "%";
                 currentTimeEl.innerText = formatTime(audio.currentTime);
@@ -304,21 +436,20 @@
         };
 
         function formatTime(s) {
-            const m = Math.floor(s/60); const sec = Math.floor(s%60);
-            return `${m}:${sec < 10 ? '0'+sec : sec}`;
+            const m = Math.floor(s / 60); const sec = Math.floor(s % 60);
+            return `${m}:${sec < 10 ? '0' + sec : sec}`;
         }
 
         function toggleMusic() {
-            // ปุ่มเล่น/หยุดในหน้า Content จะทำงานได้เสมอหลังผ่านการเช็ครหัสมาแล้ว
-            if (isPlaying) { 
-                audio.pause(); 
+            if (isPlaying) {
+                audio.pause();
                 isPlaying = false;
-            } else { 
+            } else {
                 audio.play().then(() => {
                     isPlaying = true;
                 }).catch(e => {
                     console.error("Playback failed:", e);
-                }); 
+                });
             }
             updatePlayIcon();
         }
@@ -333,4 +464,5 @@
         });
     </script>
 </body>
+
 </html>
