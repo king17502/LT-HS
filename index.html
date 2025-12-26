@@ -21,18 +21,34 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Animations */
-        @keyframes float {
-            0% { transform: translateY(0px); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateY(-100px); opacity: 0; }
+        .responsive-title {
+            font-size: clamp(1.5rem, 8vw, 3.5rem);
+            line-height: 1.1;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+
+        /* หัวใจลอยขึ้นและจางหาย */
+        @keyframes heartFloat {
+            0% {
+                transform: translate(0, 0) scale(0.5) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tw-translate-x), -100vh) scale(1.2) rotate(var(--tw-rotate));
+                opacity: 0;
+            }
         }
 
         .heart-float {
-            position: absolute;
-            color: #e11d48;
-            animation: float 2s ease-in forwards;
+            position: fixed;
+            z-index: 100;
             pointer-events: none;
+            animation: heartFloat var(--duration) ease-out forwards;
         }
 
         @keyframes shake {
@@ -170,7 +186,7 @@
 
     <!-- ==================== PAGE 2: CONTENT ==================== -->
     <div id="page-content" class="hidden w-full max-w-xl p-2 md:p-8 animate-fade-in pb-20">
-        <h1 class="text-2xl sm:text-3xl md:text-5xl font-bold text-center text-rose-600 mb-6 px-4 leading-tight break-words uppercase tracking-tight">
+        <h1 class="responsive-title font-bold text-center text-rose-600 mb-6 px-4 uppercase tracking-tight">
             Happy Wedding Anniversary 🎉
         </h1>
 
@@ -235,31 +251,29 @@
         </div>
     </div>
 
-    <div id="hearts-container" class="fixed inset-0 pointer-events-none z-50 overflow-hidden"></div>
+    <div id="hearts-container" class="fixed inset-0 pointer-events-none z-[100] overflow-hidden"></div>
 
     <script>
         lucide.createIcons();
         const CORRECT_PASSCODE = "1402";
         let currentInput = "";
         let isPlaying = false;
-        let isUnlocked = false;
+        let audioWarmedUp = false; 
         const audio = document.getElementById('bg-music');
         const playIcon = document.getElementById('play-icon');
         const progressBar = document.getElementById('progress-bar');
         const currentTimeEl = document.getElementById('current-time');
         const durationEl = document.getElementById('duration');
 
-        function unlockAudio() {
-            if (!isUnlocked) {
-                audio.play().then(() => {
-                    audio.pause();
-                    isUnlocked = true;
-                }).catch(() => {});
+        function warmUpAudio() {
+            if (!audioWarmedUp) {
+                audio.load(); 
+                audioWarmedUp = true;
             }
         }
 
         function handleKeyClick(key) {
-            unlockAudio();
+            warmUpAudio(); 
             pressKey(key);
         }
 
@@ -288,12 +302,16 @@
         function checkPasscode() {
             if (currentInput === CORRECT_PASSCODE) {
                 document.getElementById('gift-box').classList.add('open');
-                spawnHearts();
+                
+                // สั่งให้หัวใจกระจายทั่วหน้าจอหลายรอบ
+                spawnHearts(50); 
                 
                 audio.play().then(() => {
                     isPlaying = true;
                     updatePlayIcon();
-                }).catch(err => console.error(err));
+                }).catch(err => {
+                    console.error("Audio playback failed:", err);
+                });
 
                 setTimeout(() => {
                     document.getElementById('page-login').classList.add('opacity-0');
@@ -302,6 +320,8 @@
                         document.getElementById('page-content').classList.remove('hidden');
                         lucide.createIcons();
                         window.scrollTo(0, 0);
+                        // สั่งหัวใจเพิ่มอีกครั้งหลังจากเปลี่ยนหน้า
+                        spawnHearts(30);
                     }, 800);
                 }, 1000);
             } else if (currentInput.length === 4) {
@@ -316,18 +336,44 @@
             }
         }
 
-        function spawnHearts() {
+        // ฟังก์ชันสร้างหัวใจกระจายทั่วจอ
+        function spawnHearts(count = 20) {
             const container = document.getElementById('hearts-container');
-            for (let i = 0; i < 20; i++) {
+            const emojis = ['❤️', '💖', '💗', '💓', '💕', '💘'];
+            
+            for (let i = 0; i < count; i++) {
                 const heart = document.createElement('div');
-                heart.innerHTML = '❤️';
+                const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+                
+                heart.innerHTML = randomEmoji;
                 heart.className = 'heart-float';
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.bottom = '20vh';
-                heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
-                heart.style.animationDuration = (Math.random() * 1.5 + 1) + 's';
+                
+                // สุ่มตำแหน่งเริ่มต้นทั่วหน้าจอ
+                const startX = Math.random() * 100; // 0-100vw
+                const startY = Math.random() * 100 + 50; // เริ่มจากด้านล่างจอ
+                
+                // สุ่มระยะการเลื่อนซ้าย-ขวา (แกน X)
+                const driftX = (Math.random() - 0.5) * 200; // -100px ถึง 100px
+                
+                // สุ่มความเร็วและมุมหมุน
+                const duration = Math.random() * 2 + 2; // 2-4 วินาที
+                const rotation = Math.random() * 360;
+                const size = Math.random() * 20 + 20; // 20-40px
+
+                heart.style.left = startX + 'vw';
+                heart.style.top = startY + 'vh';
+                heart.style.fontSize = size + 'px';
+                heart.style.setProperty('--tw-translate-x', driftX + 'px');
+                heart.style.setProperty('--tw-rotate', rotation + 'deg');
+                heart.style.setProperty('--duration', duration + 's');
+                
+                // สุ่มดีเลย์เพื่อให้หัวใจไม่ขึ้นพร้อมกันทีเดียว
+                heart.style.animationDelay = Math.random() * 0.5 + 's';
+
                 container.appendChild(heart);
-                setTimeout(() => heart.remove(), 2500);
+                
+                // ลบ Element เมื่อจบ Animation
+                setTimeout(() => heart.remove(), (duration + 1) * 1000);
             }
         }
 
