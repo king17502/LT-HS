@@ -21,6 +21,7 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        /* --- Title Styling --- */
         .title-wrapper {
             width: 100%;
             max-width: 600px;
@@ -37,15 +38,48 @@
             overflow: visible;
         }
 
-        .svg-title text {
-            font-family: 'Mali', cursive;
-            font-weight: 800;
-            fill: #e11d48;
-            text-transform: uppercase;
-            filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 0.5));
+        @keyframes waveText {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
         }
 
-        /* แอนิเมชันพุ่งจากกล่อง (ตอน Login) */
+        .animated-letter {
+            display: inline-block;
+            animation: waveText 2s ease-in-out infinite;
+            fill: #e11d48;
+            stroke: white;
+            stroke-width: 1.5px;
+            stroke-linejoin: round;
+            paint-order: stroke fill;
+            font-family: 'Mali', cursive;
+            font-weight: 800;
+        }
+
+        @keyframes floatText {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .floating-text {
+            display: inline-block;
+            animation: floatText 2s ease-in-out infinite;
+        }
+
+        /* --- Login Animations --- */
         @keyframes burstOutWide {
             0% {
                 transform: translate(0, 0) scale(0) rotate(0deg);
@@ -62,7 +96,6 @@
             }
         }
 
-        /* แอนิเมชันลอยจากล่างขึ้นกลางจอ (หน้าที่ 2) */
         @keyframes floatUpAndFade {
             0% {
                 transform: translateY(0) translateX(0) scale(0.5) rotate(0deg);
@@ -114,6 +147,7 @@
             animation: shake 0.3s ease-in-out;
         }
 
+        /* --- Gift Box --- */
         .gift-container {
             position: relative;
             cursor: pointer;
@@ -133,6 +167,7 @@
             transform: translateY(20px);
         }
 
+        /* --- Glassmorphism UI --- */
         .ios-blur {
             background: rgba(255, 255, 255, 0.65);
             backdrop-filter: blur(20px);
@@ -140,90 +175,162 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
+        /* --- Adjusted Keypad --- */
         .keypad-btn {
-            width: 55px;
-            height: 55px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             background-color: white;
             color: #e11d48;
-            font-size: 1.25rem;
+            font-size: 1.4rem;
             font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            transition: all 0.1s;
+            box-shadow: 0 4px 10px -2px rgba(225, 29, 72, 0.15);
+            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
-            border: 2px solid #ffe4e6;
+            border: 1px solid #fecdd3;
         }
 
         @media (min-width: 640px) {
             .keypad-btn {
-                width: 65px;
-                height: 65px;
-                font-size: 1.5rem;
+                width: 70px;
+                height: 70px;
+                font-size: 1.6rem;
             }
         }
 
         .keypad-btn:active {
-            transform: scale(0.9);
-            background-color: #ffe4e6;
+            transform: scale(0.92);
+            background-color: #fff1f2;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         .pin-dot {
-            width: 45px;
-            height: 45px;
-            border-radius: 12px;
-            border: 2px solid #fecdd3;
-            background-color: rgba(255, 255, 255, 0.5);
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            border: 2.5px solid #fecdd3;
+            background-color: rgba(255, 255, 255, 0.7);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.25rem;
-            font-weight: bold;
+            font-size: 1.4rem;
+            font-weight: 700;
             color: #e11d48;
+            transition: all 0.2s ease;
         }
 
         .pin-dot.filled {
             background-color: white;
             border-color: #e11d48;
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.2);
+        }
+
+        /* --- Main Slideshow Styling --- */
+        .main-slideshow-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .main-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            object-fit: cover;
+        }
+
+        .main-slide.active {
+            opacity: 1;
+        }
+
+        /* --- Polaroid Styling --- */
+        .photo-thumbnail {
+            background-color: white;
+            padding: 10px 10px 60px 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 4px;
+            border: 1px solid #f1f5f9;
+            position: relative;
+        }
+
+        .photo-thumbnail:hover {
+            transform: scale(1.08) rotate(0deg) !important;
+            z-index: 20;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .photo-caption {
+            position: absolute;
+            bottom: 12px;
+            left: 5px;
+            right: 5px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #be123c;
+            font-weight: 700;
+            padding: 4px 2px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 8px;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 768px) {
+            .photo-caption {
+                font-size: 1rem;
+            }
+
+            .photo-thumbnail {
+                padding-bottom: 70px;
+            }
         }
     </style>
 </head>
 
-<body class="min-h-screen flex flex-col items-center justify-center text-rose-800 relative p-4">
+<body class="min-h-screen flex flex-col items-center justify-center text-rose-800 relative p-4 bg-[#fff1f2]">
 
     <!-- ==================== PAGE 1: LOGIN ==================== -->
     <div id="page-login"
-        class="flex flex-col items-center justify-center w-full max-w-sm mx-auto space-y-6 transition-opacity duration-1000">
-        <h1 class="text-xl md:text-2xl font-bold text-center mb-1 px-4">
-            🔐 ใส่รหัสลับ 4 ตัวนะอ้วน ❤️
-        </h1>
-        <h2 class="text-rose-500 font-medium text-sm md:text-base text-center px-4">
-            💕 คนพิเศษเท่านั้นที่เข้าได้ 💕
-        </h2>
+        class="flex flex-col items-center justify-center w-full max-w-sm mx-auto space-y-8 transition-opacity duration-1000">
 
-        <div id="gift-box" class="gift-container w-24 h-24 md:w-32 md:h-32 relative mx-auto">
+        <div class="text-center space-y-2">
+            <h1 class="text-2xl md:text-3xl font-bold text-rose-600 drop-shadow-sm">🔐 รหัสลับของอ้วน ❤️</h1>
+            <p class="text-rose-400 font-medium text-sm md:text-base">💕 ใส่รหัส 4 ตัว เพื่อเข้าสู่หัวใจ 💕</p>
+        </div>
+
+        <!-- Gift Box Visual -->
+        <div id="gift-box" class="gift-container w-24 h-24 md:w-32 md:h-32 relative mx-auto mb-4">
             <div
                 class="lid absolute w-[110%] h-8 md:h-10 bg-rose-500 left-[-5%] top-0 rounded-lg z-20 border-b-4 border-rose-700 shadow-lg flex justify-center items-center">
-                <div class="w-6 h-full bg-rose-300"></div>
-                <div class="absolute -top-4 text-rose-500 text-2xl md:text-4xl drop-shadow-md">🎀</div>
+                <div class="w-6 h-full bg-rose-300/50"></div>
+                <div class="absolute -top-5 text-rose-500 text-3xl md:text-4xl drop-shadow-md">🎀</div>
             </div>
             <div
                 class="body absolute w-full h-20 md:h-24 bg-rose-400 top-8 rounded-b-lg z-10 shadow-xl flex justify-center">
-                <div class="w-6 h-full bg-rose-300"></div>
+                <div class="w-6 h-full bg-rose-300/50"></div>
             </div>
         </div>
 
-        <div class="w-full bg-white/60 backdrop-blur-md p-4 md:p-6 rounded-3xl shadow-xl border border-white/50">
-            <div class="flex justify-center gap-2 md:gap-3 mb-6" id="pin-display">
+        <!-- Keypad Card -->
+        <div class="w-full ios-blur p-6 md:p-8 rounded-[2.5rem] shadow-2xl border border-white/60">
+            <div class="flex justify-center gap-3 mb-8" id="pin-display">
                 <div class="pin-dot"></div>
                 <div class="pin-dot"></div>
                 <div class="pin-dot"></div>
                 <div class="pin-dot"></div>
             </div>
-            <p id="error-msg" class="text-center text-rose-500 h-6 font-bold text-xs md:text-sm mb-2 px-2"></p>
-            <div class="grid grid-cols-3 gap-3 justify-items-center max-w-[220px] md:max-w-[250px] mx-auto">
+
+            <p id="error-msg" class="text-center text-rose-600 h-6 font-bold text-sm mb-4"></p>
+
+            <div class="grid grid-cols-3 gap-4 justify-items-center max-w-[240px] md:max-w-[280px] mx-auto">
                 <button onclick="handleKeyClick('1')" class="keypad-btn">1</button>
                 <button onclick="handleKeyClick('2')" class="keypad-btn">2</button>
                 <button onclick="handleKeyClick('3')" class="keypad-btn">3</button>
@@ -233,11 +340,12 @@
                 <button onclick="handleKeyClick('7')" class="keypad-btn">7</button>
                 <button onclick="handleKeyClick('8')" class="keypad-btn">8</button>
                 <button onclick="handleKeyClick('9')" class="keypad-btn">9</button>
-                <button onclick="handleKeyClick('*')" class="keypad-btn"><i data-lucide="delete"
-                        class="w-5 h-5"></i></button>
+                <button onclick="handleKeyClick('*')"
+                    class="keypad-btn bg-rose-500 text-white border-none"><i data-lucide="delete"
+                        class="w-6 h-6"></i></button>
                 <button onclick="handleKeyClick('0')" class="keypad-btn">0</button>
-                <button onclick="handleKeyClick('#')" class="keypad-btn"><i data-lucide="check"
-                        class="w-5 h-5"></i></button>
+                <button onclick="handleKeyClick('#')" class="keypad-btn bg-rose-500 text-white border-none"><i
+                        data-lucide="heart" class="w-6 h-6 fill-current"></i></button>
             </div>
         </div>
     </div>
@@ -245,11 +353,10 @@
     <!-- ==================== PAGE 2: CONTENT ==================== -->
     <div id="page-content" class="hidden w-full max-w-xl p-2 md:p-8 animate-fade-in pb-20">
         <div class="title-wrapper">
-            <svg viewBox="0 0 500 60" class="svg-title" preserveAspectRatio="xMidYMid meet">
-                <text x="50%" y="45" text-anchor="middle" font-size="36" textLength="480"
-                    lengthAdjust="spacingAndGlyphs">
-                    HAPPY WEDDING ANNIVERSARY 🎉
-                </text>
+            <svg viewBox="0 0 500 80" class="svg-title" id="main-svg-title">
+                <g id="letter-group" transform="translate(250, 45)" text-anchor="middle" font-size="32">
+                    <!-- Text will be injected here by JS -->
+                </g>
             </svg>
         </div>
 
@@ -258,20 +365,33 @@
             <p class="text-base md:text-xl text-rose-800">ขอบคุณที่รักและดูแลกันเป็นอย่างดีเสมอมา</p>
             <p class="text-base md:text-lg text-rose-700">เราผ่านอะไรมาด้วยกันมากมายทั้งร้ายและดี</p>
             <p class="text-base md:text-lg text-rose-700">ทุกวันที่ได้อยู่กับเธอคือของขวัญที่ดีที่สุดเลย</p>
-            <p class="text-lg md:text-xl text-rose-700 font-bold mt-2">รักมากที่สุดในโลกเลยนะเจ้าอ้วน! ❤️</p>
+            <div class="pt-2">
+                <p class="text-lg md:text-2xl text-rose-700 font-bold floating-text">รักมากที่สุดในโลกเลยนะเจ้าอ้วน! ❤️
+                </p>
+            </div>
         </div>
 
+        <!-- Main Auto Slideshow (เหนือเครื่องเล่นเพลง) -->
         <div
-            class="w-full aspect-[4/3] bg-rose-200 rounded-2xl overflow-hidden shadow-xl mb-8 border-4 border-white mx-auto">
-            <img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
-                class="w-full h-full object-cover">
+            class="w-full max-w-md aspect-square bg-rose-200 rounded-2xl overflow-hidden shadow-xl mb-8 border-4 border-white mx-auto relative">
+            <div class="main-slideshow-container" id="main-slideshow">
+                <!-- รูปภาพ 5 รูปที่จะวนอัตโนมัติ -->
+                <img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
+                    class="main-slide active">
+                <img src="https://i.pinimg.com/1200x/db/a5/2e/dba52ef421cc31fc68553389344a2f1e.jpg" class="main-slide">
+                <img src="https://i.pinimg.com/1200x/c2/88/e1/c288e1ebff31f5f1995bd5ebfe919b33.jpg" class="main-slide">
+                <img src="https://i.pinimg.com/1200x/f7/6a/18/f76a1878c74b24f206cbf6c3ebe75152.jpg" class="main-slide">
+                <img src="https://i.pinimg.com/1200x/7d/0a/2f/7d0a2f94da2237631c20027f554453d7.jpg" class="main-slide">
+                <img src="https://i.pinimg.com/1200x/79/91/63/799163811cefc3a6a0073bf9583c43f6.jpg" class="main-slide">
+            </div>
         </div>
 
         <!-- Music Player -->
         <div
             class="w-full ios-blur rounded-[1.5rem] p-4 md:p-6 shadow-xl mb-10 text-rose-900 border border-white/50 relative overflow-hidden mx-auto max-w-md">
             <div class="flex gap-3 items-center mb-6">
-                <div class="w-14 h-14 md:w-20 md:h-20 rounded-xl shadow-lg shrink-0 overflow-hidden bg-rose-100">
+                <div
+                    class="w-14 h-14 md:w-20 md:h-20 rounded-xl shadow-lg shrink-0 overflow-hidden bg-rose-100 border-2 border-white">
                     <img src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
                         class="w-full h-full object-cover">
                 </div>
@@ -307,44 +427,7 @@
         </div>
 
         <h2 class="text-xl font-bold text-center mb-6 text-rose-500">ความทรงจำของเรา 📸</h2>
-        <div class="grid grid-cols-2 gap-3 mb-12 px-2">
-            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img
-                    src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
-                    class="w-full h-full object-cover"></div>
-            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img
-                    src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
-                    class="w-full h-full object-cover"></div>
-            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img
-                    src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
-                    class="w-full h-full object-cover"></div>
-            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img
-                    src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
-                    class="w-full h-full object-cover"></div>
-            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img
-                    src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
-                    class="w-full h-full object-cover"></div>
-            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img
-                    src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
-                    class="w-full h-full object-cover"></div>
-            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img
-                    src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
-                    class="w-full h-full object-cover"></div>
-            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img
-                    src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
-                    class="w-full h-full object-cover"></div>
-            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img
-                    src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
-                    class="w-full h-full object-cover"></div>
-            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img
-                    src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
-                    class="w-full h-full object-cover"></div>
-            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img
-                    src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
-                    class="w-full h-full object-cover"></div>
-            <div class="aspect-square bg-rose-100 rounded-2xl overflow-hidden shadow-md"><img
-                    src="https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg"
-                    class="w-full h-full object-cover"></div>
-        </div>
+        <div class="grid grid-cols-2 gap-x-4 gap-y-10 mb-12 px-2" id="photo-grid"></div>
 
         <div class="text-center py-8 border-t-2 border-rose-100 px-6">
             <p class="text-base text-rose-600 font-bold mb-1">ไม่ว่าจะผ่านไปกี่ปี ก็ยังจะรักแบบนี้ตลอดไป</p>
@@ -361,6 +444,7 @@
         let currentInput = "";
         let isPlaying = false;
         let continuousEffectTimer = null;
+        let slideInterval = null;
 
         const audio = document.getElementById('bg-music');
         const playIcon = document.getElementById('play-icon');
@@ -368,17 +452,72 @@
         const currentTimeEl = document.getElementById('current-time');
         const durationEl = document.getElementById('duration');
         const celebrationContainer = document.getElementById('celebration-container');
+        const photoGrid = document.getElementById('photo-grid');
 
         const loveItems = ['❤️', '💖', '💕', '🎀', '🌹', '🌷', '💗'];
 
+        const memoryData = [
+            { src: "https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg", caption: "เดทแรกของเรา 👫" },
+            { src: "https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg", caption: "ยิ้มหวานของอ้วน 😊" },
+            { src: "https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg", caption: "กินเก่งเหมือนกัน 🍕" },
+            { src: "https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg", caption: "ทริปนี้สนุกมาก 🚗" },
+            { src: "https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg", caption: "ขอบคุณที่อยู่ข้างกัน 🧸" },
+            { src: "https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg", caption: "รูปนี้เราน่ารักเนอะ ✨" },
+            { src: "https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg", caption: "คนสวยของเค้า 💖" },
+            { src: "https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg", caption: "มองกี่ทีก็ไม่เบื่อ 🥰" },
+            { src: "https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg", caption: "ความสุขของเรา 🎈" },
+            { src: "https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg", caption: "เจ้าแก้มอ้วน 🍑" },
+            { src: "https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg", caption: "รักอ้วนที่สุดเลย 💌" },
+            { src: "https://i.pinimg.com/736x/5e/6b/05/5e6b05ee47dcb1a100ae19a8419fbe28.jpg", caption: "ตลอดไปนะจ๊ะ 💍" }
+        ];
+
+        // --- Content Setup ---
+        const titleText = "HAPPY WEDDING ANNIVERSARY 🎉";
+        const letterGroup = document.getElementById('letter-group');
+        const charArray = Array.from(titleText);
+        const letterSpacing = 16;
+        const totalWidth = (charArray.length - 1) * letterSpacing;
+
+        charArray.forEach((char, i) => {
+            const textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            textNode.textContent = char;
+            const xPos = (i * letterSpacing) - (totalWidth / 2);
+            textNode.setAttribute("x", xPos);
+            textNode.setAttribute("y", "0");
+            textNode.classList.add("animated-letter");
+            textNode.style.animationDelay = `${Math.abs(i - (charArray.length / 2)) * 0.1}s`;
+            letterGroup.appendChild(textNode);
+        });
+
+        memoryData.forEach(item => {
+            const div = document.createElement('div');
+            div.className = "photo-thumbnail aspect-[4/5]";
+            div.style.transform = `rotate(${(Math.random() * 8 - 4).toFixed(1)}deg)`;
+            div.innerHTML = `<img src="${item.src}" class="w-full h-full object-cover rounded-sm"><div class="photo-caption">${item.caption}</div>`;
+            photoGrid.appendChild(div);
+        });
+
+        // --- Slideshow Logic ---
+        function startMainSlideshow() {
+            const slides = document.querySelectorAll('.main-slide');
+            let currentIdx = 0;
+
+            if (slideInterval) clearInterval(slideInterval);
+
+            slideInterval = setInterval(() => {
+                slides[currentIdx].classList.remove('active');
+                currentIdx = (currentIdx + 1) % slides.length;
+                slides[currentIdx].classList.add('active');
+            }, 2000); // เปลี่ยนรูปทุก 3.5 วินาที
+        }
+
+        // --- Interaction Logic ---
         function handleKeyClick(key) {
-            if (key === '*') {
-                currentInput = currentInput.slice(0, -1);
-            } else if (key === '#') {
-                checkPasscode();
-            } else if (currentInput.length < 4) {
+            if (key === '*') currentInput = currentInput.slice(0, -1);
+            else if (key === '#') { if (currentInput.length === 4) checkPasscode(); }
+            else if (currentInput.length < 4) {
                 currentInput += key;
-                if (currentInput.length === 4) setTimeout(checkPasscode, 200);
+                if (currentInput.length === 4) setTimeout(checkPasscode, 250);
             }
             updateDisplay();
         }
@@ -395,17 +534,10 @@
             if (currentInput === CORRECT_PASSCODE) {
                 const giftBox = document.getElementById('gift-box');
                 giftBox.classList.add('open');
-
                 const rect = giftBox.getBoundingClientRect();
-                const centerX = rect.left + (rect.width / 2);
-                const centerY = rect.top + (rect.height / 2);
+                for (let i = 0; i < 50; i++) createItem(celebrationContainer, loveItems, rect.left + rect.width / 2, rect.top + rect.height / 2, 'burst');
 
-                // Burst Effect ตอนเปิดกล่อง
-                for (let i = 0; i < 60; i++) {
-                    createItem(celebrationContainer, loveItems, centerX, centerY, 'burst');
-                }
-
-                audio.play().then(() => { isPlaying = true; updatePlayIcon(); }).catch(e => console.log(e));
+                audio.play().then(() => { isPlaying = true; updatePlayIcon(); }).catch(() => { });
 
                 setTimeout(() => {
                     document.getElementById('page-login').classList.add('opacity-0');
@@ -413,11 +545,10 @@
                         document.getElementById('page-login').classList.add('hidden');
                         document.getElementById('page-content').classList.remove('hidden');
                         window.scrollTo(0, 0);
-
-                        // เริ่มแอนิเมชันลอยแบบต่อเนื่องวนลูป
                         startContinuousEffect();
+                        startMainSlideshow(); // เริ่มเล่นสไลด์โชว์เมื่อเข้าหน้าหลัก
                     }, 800);
-                }, 1000);
+                }, 800);
             } else {
                 document.getElementById('error-msg').innerText = "รหัสผิดนะอ้วน ลองใหม่เร็ว~ 🥺";
                 document.getElementById('pin-display').classList.add('shake');
@@ -430,55 +561,42 @@
             }
         }
 
+        // --- Effects & Particles ---
         function startContinuousEffect() {
             if (continuousEffectTimer) return;
-
-            // สร้างไอเทมใหม่ทุกๆ 400ms เพื่อให้ดูหนาตาขึ้น
             continuousEffectTimer = setInterval(() => {
-                const startX = Math.random() * window.innerWidth;
-                const startY = window.innerHeight + 20;
-                createItem(celebrationContainer, loveItems, startX, startY, 'float-forever');
-            }, 400);
+                createItem(celebrationContainer, loveItems, Math.random() * window.innerWidth, window.innerHeight + 20, 'float-forever');
+            }, 600);
         }
 
         function createItem(container, items, startX, startY, type) {
             const el = document.createElement('div');
             el.className = `celebration-item ${type === 'burst' ? 'burst-anim' : 'float-forever-anim'}`;
             el.innerHTML = items[Math.floor(Math.random() * items.length)];
-
             el.style.left = startX + 'px';
             el.style.top = startY + 'px';
-
             const size = Math.random() * 15 + 20;
             el.style.fontSize = size + 'px';
 
             if (type === 'burst') {
-                const destX = (Math.random() - 0.5) * window.innerWidth * 1.5;
-                const destY = (Math.random() - 0.7) * window.innerHeight * 1.2;
                 const duration = Math.random() * 2 + 1.5;
-
-                el.style.setProperty('--dest-x', destX + 'px');
-                el.style.setProperty('--dest-y', destY + 'px');
+                el.style.setProperty('--dest-x', (Math.random() - 0.5) * window.innerWidth * 1.5 + 'px');
+                el.style.setProperty('--dest-y', (Math.random() - 0.7) * window.innerHeight * 1.2 + 'px');
                 el.style.setProperty('--dest-scale', (Math.random() * 1.2 + 0.5));
                 el.style.setProperty('--dest-rot', (Math.random() * 720 - 360) + 'deg');
                 el.style.setProperty('--dur', duration + 's');
-
                 setTimeout(() => el.remove(), duration * 1000);
             } else {
-                // สำหรับลอยจากล่างขึ้นกลางจอแบบวนลูป
-                const duration = Math.random() * 3 + 4; // ลอย 4-7 วินาที
-                const driftX = (Math.random() - 0.5) * 150; // ส่ายซ้ายขวา
-
+                const duration = Math.random() * 3 + 5;
                 el.style.setProperty('--dur', duration + 's');
-                el.style.setProperty('--drift-x', driftX + 'px');
+                el.style.setProperty('--drift-x', (Math.random() - 0.5) * 150 + 'px');
                 el.style.setProperty('--rot-end', (Math.random() * 360) + 'deg');
-
                 setTimeout(() => el.remove(), duration * 1000);
             }
-
             container.appendChild(el);
         }
 
+        // --- Audio Controls ---
         audio.ontimeupdate = () => {
             if (audio.duration) {
                 progressBar.style.width = (audio.currentTime / audio.duration) * 100 + "%";
